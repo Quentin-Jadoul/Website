@@ -1,10 +1,66 @@
 <!-- basic html template -->
 <html>
     <head>
-        <title>Teachers</title>
+        <title>teachers</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+        <h1>teachers</h1>
+        <h2>Click on the tabs to navigate</h2>
+        <nav>
+            <ul class="tab">
+                <li><a href="/academicyear">Academic Year</a></li>
+                <li><a href="/classes">Classes</a></li>
+                <li><a href="/students">students</a></li>
+                <li><a href="/teachers">Teachers</a></li>
+            </ul>
+        </nav>
+
+        <!-- basic html template -->
+        <html>
+            <head>
+                <title>New teacher Form</title>
+                <link rel="stylesheet" href="css/style.css">
+            </head>
+            <body>
+                <h1>New teacher</h1>
+                <form action="/newteacher" method="POST">
+                    <label for="firstname">Firstname:</label>
+                    <input type="text" id="firstname" name="firstname" required><br><br>
+                    <label for="lastname">Lastname:</label>
+                    <input type="text" id="lastname" name="lastname" required><br><br>
+                    <!-- <label for="email">Email:</label> -->
+                    <!-- <input type="email" id="email" name="email" required><br><br> -->
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+                <h1>added teachers</h1>
+                
+                <% if (typeof teacher !== 'undefined') { %>
+                    <h3>Added Teacher:</h3>
+                    <p>First Name: <%= teacher.firstname %></p>
+                    <p>Last Name: <%= teacher.lastname %></p>
+                <% } %>
+
+                <h1>search teacher</h1>
+                <form action="/getteacher" method="GET">
+                    <label for="firstname">Firstname:</label>
+                    <input type="text" id="firstname" name="firstname" required><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+                <h1>found teachers</h1>
+                
+                <% if (typeof teachers !== 'undefined') { %>
+                    <% for (var i = 0; i < teachers.length; i++) { %>
+                        <h3>Found Teacher:</h3>
+                        <p>First Name: <%= teachers[i].firstname %></p>
+                        <p>Last Name: <%= teachers[i].lastname %></p>
+                    <% } %>
+                <% } %>
+            </body>
+        </html>
+        
     </body>
     
 

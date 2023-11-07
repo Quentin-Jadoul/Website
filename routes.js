@@ -16,4 +16,7 @@ router.post('/newStudent', studentController.newStudent);
 router.get('/teachers', teacherController.teachers);
 router.get('/academicyear', academicyearController.academicYears);
 
+router.post('/newTeacher', teacherController.newTeacher);
+router.get('/getteacher', teacherController.searchTeacherByFirstName);
+
 module.exports = router;
