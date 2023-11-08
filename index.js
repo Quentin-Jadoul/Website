@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 let router = require('./routes');
-const db = require('./db');
+// const db = require('./db');
 app.use(express.urlencoded({extended: true}));
 
 
