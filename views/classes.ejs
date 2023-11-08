@@ -1,10 +1,73 @@
 <!-- basic html template -->
 <html>
     <head>
-        <titl>Classes</titl></title>
+        <title>class</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+        <h1>teachers</h1>
+        <h2>Click on the tabs to navigate</h2>
+        <nav>
+            <ul class="tab">
+                <li><a href="/classes">Classes</a></li>
+                <li><a href="/students">students</a></li>
+                <li><a href="/teachers">Teachers</a></li>
+            </ul>
+        </nav>
+
+        <!-- basic html template -->
+        <html>
+            <head>
+                <title>New class Form</title>
+                <link rel="stylesheet" href="css/style.css">
+            </head>
+            <body>
+                <h1>New class</h1>
+                <form action="/newClass" method="POST">
+                    <label for="name">name:</label>
+                    <input type="text" id="name" name="name" required><br><br>
+                    <label for="teacherCode">teacherCode:</label>
+                    <input type="text" id="teacherCode" name="teacherCode" required><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+                <h1>added class</h1>
+                
+                <% if (typeof ClassObject !== 'undefined') { %>
+                    <h3>Added class:</h3>
+                    <p>Name: <%= ClassObject.name %></p>
+                    <p>TeacherCode: <%= ClassObject.teacherCode %></p>
+                <% } %>
+
+                <h1>search class by name</h1>
+                <form action="/getClass" method="GET">
+                    <label for="firstname">Class Name:</label>
+                    <input type="text" id="name" name="name" required><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+
+                <h1>search class by id</h1>
+                <form action="/getClassById" method="GET">
+                    <label for="firstname">Id:</label>
+                    <select name="Classid" id="Classid">
+                        <% for( let index = 0; index < lenClasses; index++ ) { %>
+                            <option value="<%= index %>"><%= index %></option>
+                        <% } %>
+                    </select>
+                    <button type="submit">Submit</button>
+                </form>
+
+                <h1>found class</h1>
+                
+                <% if (typeof classes !== 'undefined') { %>
+                    <% for (var i = 0; i < classes.length; i++) { %>
+                        <h3>Found classes:</h3>
+                        <p>Name: <%= classes[i].name %></p>
+                        <p>teacherCode: <%= classes[i].teacherCode %></p>
+                    <% } %>
+                <% } %>
+            </body>
+        </html>
+        
     </body>
     
 

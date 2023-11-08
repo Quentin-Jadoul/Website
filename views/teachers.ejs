@@ -9,7 +9,7 @@
         <h2>Click on the tabs to navigate</h2>
         <nav>
             <ul class="tab">
-                <li><a href="/academicyear">Academic Year</a></li>
+
                 <li><a href="/classes">Classes</a></li>
                 <li><a href="/students">students</a></li>
                 <li><a href="/teachers">Teachers</a></li>
@@ -43,10 +43,21 @@
                     <p>Last Name: <%= teacher.lastname %></p>
                 <% } %>
 
-                <h1>search teacher</h1>
+                <h1>search teacher by name</h1>
                 <form action="/getteacher" method="GET">
                     <label for="firstname">Firstname:</label>
                     <input type="text" id="firstname" name="firstname" required><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+
+                <h1>search teacher by name</h1>
+                <form action="/getteacherById" method="GET">
+                    <label for="firstname">Id:</label>
+                    <select name="Teacherid" id="Teacherid">
+                        <% for( let index = 0; index < lenTeachers; index++ ) { %>
+                            <option value="<%= index %>"><%= index %></option>
+                        <% } %>
+                    </select>
                     <button type="submit">Submit</button>
                 </form>
                 <h1>found teachers</h1>
@@ -65,6 +76,8 @@
     
 
     <script>
+
+        
     </script>
 
 </html>

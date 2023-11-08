@@ -4,7 +4,6 @@ let router = express.Router();
 let classController = require('./controllers/classController');
 let studentController = require('./controllers/studentController');
 let teacherController = require('./controllers/teacherController');
-let academicyearController = require('./controllers/academicyearController');
 
 // List of all the routes
 router.get('/', function (req, res) {
@@ -14,9 +13,17 @@ router.get('/classes', classController.classes);
 router.get('/students', studentController.students);
 router.post('/newStudent', studentController.newStudent);
 router.get('/teachers', teacherController.teachers);
-router.get('/academicyear', academicyearController.academicYears);
+
 
 router.post('/newTeacher', teacherController.newTeacher);
 router.get('/getteacher', teacherController.searchTeacherByFirstName);
+router.get('/getteacherById', teacherController.searchTeacherById);
+
+router.get('/getstudent', studentController.searchStudentByFirstName);
+router.get('/getstudentById', studentController.searchStudentById);
+
+router.post('/newClass', classController.newClass);
+router.get('/getclass', classController.searchClassByName);
+router.get('/getclassById', classController.searchClassById);
 
 module.exports = router;
