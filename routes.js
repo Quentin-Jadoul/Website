@@ -6,6 +6,8 @@ let studentController = require('./controllers/studentController');
 let teacherController = require('./controllers/teacherController');
 
 // List of all the routes
+
+
 router.get('/', function (req, res) {
     res.render('index.ejs', { title: 'Home' });
 });

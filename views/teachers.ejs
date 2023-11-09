@@ -10,9 +10,9 @@
         <nav>
             <ul class="tab">
 
-                <li><a href="/classes">Classes</a></li>
-                <li><a href="/students">students</a></li>
-                <li><a href="/teachers">Teachers</a></li>
+                <li><a href="/teacher/classes">Classes</a></li>
+                <li><a href="/teacher/students">students</a></li>
+                <li><a href="/teacher/teachers">Teachers</a></li>
             </ul>
         </nav>
 
@@ -24,7 +24,7 @@
             </head>
             <body>
                 <h1>New teacher</h1>
-                <form action="/newteacher" method="POST">
+                <form action="/teacher/newteacher" method="POST">
                     <label for="firstname">Firstname:</label>
                     <input type="text" id="firstname" name="firstname" required><br><br>
                     <label for="lastname">Lastname:</label>
@@ -44,14 +44,14 @@
                 <% } %>
 
                 <h1>search teacher by name</h1>
-                <form action="/getteacher" method="GET">
+                <form action="/teacher/getteacher" method="GET">
                     <label for="firstname">Firstname:</label>
                     <input type="text" id="firstname" name="firstname" required><br><br>
                     <button type="submit">Submit</button>
                 </form>
 
                 <h1>search teacher by name</h1>
-                <form action="/getteacherById" method="GET">
+                <form action="/teacher/getteacherById" method="GET">
                     <label for="firstname">Id:</label>
                     <select name="Teacherid" id="Teacherid">
                         <% for( let index = 0; index < lenTeachers; index++ ) { %>
