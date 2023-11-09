@@ -50,7 +50,7 @@
                     <label for="firstname">Id:</label>
                     <select name="Classid" id="Classid">
                         <% for( let index = 0; index < lenClasses; index++ ) { %>
-                            <option value="<%= index %>"><%= index %></option>
+                            <option value="<%= index+1 %>"><%= index+1 %></option>
                         <% } %>
                     </select>
                     <button type="submit">Submit</button>
