@@ -20,6 +20,8 @@ router.get ('/academicYear',(req, res) => {
       });
 
 
+router.get('/getacademicYearByYear', academicYearController.getacademicYearByYear);
+
 router.post('/newacademicYear', academicYearController.newacademicYear);
 
 router.post('/newTeacher', teacherController.newTeacher);

@@ -11,61 +11,109 @@
         <h2>Click on the tabs to navigate</h2>
         <nav>
             <ul class="tab">
+                <li><a href="/teacher/academicYear">Academic Year</a></li>
                 <li><a href="/teacher/classes">Classes</a></li>
                 <li><a href="/teacher/students">students</a></li>
                 <li><a href="/teacher/teachers">Teachers</a></li>
             </ul>
         </nav>
-    <p id = "academicYearp1">Create academic year</p>
+    
+    <div>
+        <h1 id = "academicYearp1">Create academic year</h1>
     <form id = "academicYearForm" onsubmit="handleForm(event)">
-        <input type="text" id = "academicYear" name = "academicYear" placeholder = "academicYear">
-        <input type="text" id = " comment" name = "comment" placeholder = "comment">
+        <label for="academicYear">Year</label>
+        <input type="number" id = "academicYear" name = "academicYear" placeholder = "academicYear" max="10">
+        <label for="comment">Comment</label>
+        <input type="text" id = " comment" name = "comment" placeholder = "comment" max="10">
         <input type="submit" value = "submit">
     </form>
     <p id = "result"></p>
+    </div>
+    <h1> Get a year's comment by year </h1>
+    <form id="getAcademicYearForm" onsubmit="handleGetForm(event)">
+        <label for="getAcademicYear">Year</label>
+        <input type="text" id="getAcademicYear" name="getAcademicYear" placeholder="Enter academic year">
+        <input type="submit" value="Get Data">
+    </form>
+
+    <p id="getresultYear"></p>
+    <p id="getresultComment"></p>
 </body>
 
 <script>
     function handleForm(event){
-    console.log("salutuututu");
+        event.preventDefault();
+        const form = event.currentTarget;
+        const url = "/teacher/newacademicYear";
+        const formData = new FormData(form);
+        console.log(Array.from(formData.entries()));
 
-    event.preventDefault();
-    const form = event.currentTarget;
-    const url = "/teacher/newacademicYear";
-    const formData = new FormData(form);
-    console.log(Array.from(formData.entries()));
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        console.log('Status code:', response.status);
-        return response.text();
-    })
-    .then(data => {
-        console.log(data);
-        if (data.error) {
-            alert(data);
-        } else {
-            document.getElementById("result").innerHTML = data;
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
 
-    function getAcademicYear(){
-        fetch('/teacher/getacademicYearByYear')
+        // Convert the form data to a JSON object
+        // const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            console.log('Status code:', response.status);
+            return response.text();
+        })
+        .then(data => {
+            console.log(data);
+            if (data.error) {
+                // alert(data);
+            } else {
+                document.getElementById("result").innerHTML = data;
+            }
+        })
+        .catch(error => {});
+    }
+
+    // function getAcademicYear(){
+    //     fetch('/teacher/getacademicYearByYear')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         if (data.error) {
+    //             alert(data.error);
+    //         } else {
+    //             alert(data.message);
+    //         }
+    //     });
+    // }
+    
+
+
+    function handleGetForm(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const year = form.getAcademicYear.value;
+        const url = `/teacher/getacademicYearByYear?year=${year}`;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
         .then(response => response.json())
         .then(data => {
             console.log(data);
             if (data.error) {
                 alert(data.error);
             } else {
-                alert(data.message);
+                document.getElementById("getresultYear").innerHTML = data[0].year;
+                document.getElementById("getresultComment").innerHTML = data[0].comment;
             }
-        });
+        })
+        .catch(error => console.error('Error:', error));
     }
-    
     // function handleForm(event){
     //     console.log("salutuututu");
     
