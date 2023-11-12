@@ -1,13 +1,12 @@
-const mysql = require('mysql');
 
+const mysql = require('mysql');
+require('dotenv').config();
 
 var db = mysql.createConnection({
     host: "localhost",
     user: "rpi2",
-    port: 3306,
-    password: "local",
+    password: process.env.DB_PASSWORD,
   });
-
 
 
 executeQuery("CREATE DATABASE IF NOT EXISTS SchoolApp;", function(result) {
