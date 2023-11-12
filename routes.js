@@ -4,7 +4,7 @@ let router = express.Router();
 let classController = require('./controllers/classController');
 let studentController = require('./controllers/studentController');
 let teacherController = require('./controllers/teacherController');
-
+let academicYearController = require('./controllers/academicYearController');
 // List of all the routes
 
 
@@ -15,7 +15,12 @@ router.get('/classes', classController.classes);
 router.get('/students', studentController.students);
 router.post('/newStudent', studentController.newStudent);
 router.get('/teachers', teacherController.teachers);
+router.get ('/academicYear',(req, res) => {
+        res.sendFile('views/academicYear.html', {root: __dirname });
+      });
 
+
+router.post('/newacademicYear', academicYearController.newacademicYear);
 
 router.post('/newTeacher', teacherController.newTeacher);
 router.get('/getteacher', teacherController.searchTeacherByFirstName);

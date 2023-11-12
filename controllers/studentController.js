@@ -2,6 +2,14 @@ let Student = require('../models/studentModel');
 
 const db = require('../db');
 
+function escapeHtml(unsafe) {
+    return encodeURIComponent(unsafe).replace(/[!'()*]/g, function(c) {
+        return '%' + c.charCodeAt(0).toString(16);
+    });
+}
+
+
+
 lenStudents = 0;
 
 exports.students = function (req, res) {
@@ -19,7 +27,7 @@ exports.newStudent = function (req, res) {
     const { firstname, lastname, email, password } = req.body;
     // console.log(req)
     // console.log(firstname, lastname, email)
-    db.query('INSERT INTO students (firstname, lastname, email, password) VALUES (?, ?, ?,?)', [firstname, lastname, email, password], function(err) {
+    db.query('INSERT INTO students (firstname, lastname, email, password) VALUES (?, ?, ?,?)', [ escapeHtml(firstname),  escapeHtml(lastname), email, password], function(err) {
         if (err) {
             console.error(err.message);
             return res.status(500).send('Error inserting student into the database');

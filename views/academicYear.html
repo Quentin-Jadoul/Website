@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <h1>Academic Year</h1>
+        <h2>Click on the tabs to navigate</h2>
+        <nav>
+            <ul class="tab">
+                <li><a href="/teacher/classes">Classes</a></li>
+                <li><a href="/teacher/students">students</a></li>
+                <li><a href="/teacher/teachers">Teachers</a></li>
+            </ul>
+        </nav>
+    <p id = "academicYearp1">Create academic year</p>
+    <form id = "academicYearForm" onsubmit="handleForm(event)">
+        <input type="text" id = "academicYear" name = "academicYear" placeholder = "academicYear">
+        <input type="text" id = " comment" name = "comment" placeholder = "comment">
+        <input type="submit" value = "submit">
+    </form>
+    <p id = "result"></p>
+</body>
+
+<script>
+    function handleForm(event){
+    console.log("salutuututu");
+
+    event.preventDefault();
+    const form = event.currentTarget;
+    const url = "/teacher/newacademicYear";
+    const formData = new FormData(form);
+    console.log(Array.from(formData.entries()));
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log('Status code:', response.status);
+        return response.text();
+    })
+    .then(data => {
+        console.log(data);
+        if (data.error) {
+            alert(data);
+        } else {
+            document.getElementById("result").innerHTML = data;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+    function getAcademicYear(){
+        fetch('/teacher/getacademicYearByYear')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.error) {
+                alert(data.error);
+            } else {
+                alert(data.message);
+            }
+        });
+    }
+    
+    // function handleForm(event){
+    //     console.log("salutuututu");
+    
+    //     event.preventDefault();
+    //     const form = event.currentTarget;
+
+
+
+
+        // field = document.getElementById('result');
+        // field.innerHTML = form.academicYear.value;
+        // fetch('/teacher/newacademicYear', {
+        //     method: 'POST',
+        //     body: new FormData(form)
+        // }).then(response => response.json())
+        // .then(data => {
+        //     console.log(data);
+        //     if (data.error) {
+        //         alert(data.error);
+        //     } else {
+        //         alert(data.message);
+        //     }
+        // });
+
+
+        // const url = form.action;
+        // const formData = new FormData(form);
+        // fetch(url, {
+        //     method: 'POST',
+        //     body: formData
+        // }).then(response => response.json())
+        // .then(data => {
+        //     console.log(data);
+        //     if (data.error) {
+        //         alert(data.error);
+        //     } else {
+        //         alert(data.message);
+        //     }
+        // });
+    // }
+    </script>
+    
+</html>

@@ -4,6 +4,7 @@ const mysql = require('mysql');
 var db = mysql.createConnection({
     host: "localhost",
     user: "rpi2",
+    port: 3305,
     password: "local",
   });
 
@@ -21,6 +22,11 @@ db.query("USE SchoolApp;", function(err, result) {
 db.query("CREATE TABLE IF NOT EXISTS teachers (id INT AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), email VARCHAR(255), password VARCHAR(255));", function(err, result) {
     if (err) throw err;
     // console.log("Teachers table created successfully.");
+});
+
+db.query("CREATE TABLE IF NOT EXISTS academicYears (id INT AUTO_INCREMENT PRIMARY KEY, year VARCHAR(255), comment VARCHAR(255));", function(err, result) {
+    if (err) throw err;
+    // console.log("AcademicYears table created successfully.");
 });
 
 db.query("CREATE TABLE IF NOT EXISTS students (id INT AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), email VARCHAR(255), password VARCHAR(255));", function(err, result) {
